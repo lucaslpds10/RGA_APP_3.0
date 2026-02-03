@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAGUI DIGITAL - Registro</title>
+  <style>
+    :root {
+      --primary-color: #00c2ff;
+      --secondary-color: #7d42f4;
+      --accent-color: #ff6b6b;
+      --dark-bg: #121212;
+      --dark-surface: #1e1e1e;
+      --dark-border: #333;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiMzMzMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==');
+      background-attachment: fixed;
+    }
+    
+    header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--dark-border);
+    }
+    
+    .logo {
+      margin-right: 20px;
+    }
+    
+    .logo svg {
+      width: 50px;
+      height: 50px;
+    }
+    
+    h2 {
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 28px;
+    }
+    
+    main {
+      background-color: var(--dark-surface);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    th, td {
+      border: 1px solid var(--dark-border);
+      padding: 12px 8px;
+      text-align: center;
+    }
+    
+    th {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: var(--text-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    input[type="text"], input[type="time"], input[type="date"] {
+      width: 100%;
+      box-sizing: border-box;
+      border: none;
+      background: transparent;
+      text-align: center;
+      padding: 8px 4px;
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+       border-bottom: 1px solid var(--dark-border);
+    }
+    
+    input:focus {
+      outline: none;
+      border-bottom-color: var(--primary-color);
+    }
+    
+    input[readonly] {
+      opacity: 0.7;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
+    }
+    
+    button svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    #total-geral {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      padding: 15px;
+      border-top: 1px solid var(--dark-border);
+    }
+    
+    .status-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .status-message.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background-color: var(--dark-surface);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+    
+    .modal-title {
+      margin-top: 0;
+      color: var(--warning-color);
+    }
+    
+    /* Estilos para as setas amarelas */
+    .seta-container {
+      position: relative;
+    }
+    
+    .seta-icon {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    
+    input.seta-esquerda:checked + .checkmark .seta-esquerda-icon,
+    input.seta-direita:checked + .checkmark .seta-direita-icon {
+      animation: piscar-seta 1s ease-in-out infinite;
+      pointer-events: auto;
+    }
+    
+    input.seta-esquerda:checked + .checkmark,
+    input.seta-direita:checked + .checkmark {
+      animation: piscar-texto 1s ease-in-out infinite;
+    }
+    
+    /* Garantir que os campos permaneçam editáveis */
+    input, select, textarea {
+      pointer-events: auto !important;
+    }
+    
+    @keyframes piscar-seta {
+      0%, 100% { stroke: #FFD700; }
+      50% { stroke: #FF0000; }
+    }
+    
+    @keyframes piscar-texto {
+      0%, 100% { color: inherit; }
+      50% { color: #FF0000; }
+    }
+    
+    /* Animação de piscar para setas */
+        @keyframes piscar {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        .piscando {
+          animation: piscar 0.6s ease-in-out 2;
+        }
+        
+        /* Animação contínua para botões sempre piscando */
+        @keyframes piscarContinuo {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.9; transform: scale(1.02); }
+        }
+        
+        .piscando-continuo {
+          animation: piscarContinuo 1.5s ease-in-out infinite;
+        }
+        
+        /* Mantém a letra sempre visível durante o piscar */
+        .seta-botao.piscando,
+        .seta-botao.piscando-continuo {
+          color: white !important;
+          text-shadow: 0 0 3px rgba(0,0,0,0.8);
+        }
+        
+        .seta-botao.piscando .seta-icon path,
+        .seta-botao.piscando-continuo .seta-icon path {
+          stroke: white !important;
+          filter: drop-shadow(0 0 2px rgba(0,0,0,0.8));
+        }
+    
+    /* Estilo para botões de seta clicáveis */
+        .seta-botao {
+          background: none;
+          border: 2px solid #FF0000;
+          border-radius: 8px;
+          padding: 8px 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 12px;
+          color: #FF0000;
+        }
+        
+        .seta-botao:hover {
+          background-color: rgba(255, 0, 0, 0.1);
+          transform: translateY(-1px);
+        }
+        
+        .seta-botao:active {
+          transform: translateY(0);
+        }
+        
+        .seta-botao.selecionado {
+          background-color: #FF0000;
+          color: white;
+        }
+        
+        .seta-botao.selecionado .seta-icon path {
+          stroke: white;
+        }
+    
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    /* Estilos para o Calendário de Resumo Diário */
+    .calendario-container {
+      margin-top: 30px;
+      background-color: var(--dark-surface);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .calendario-container h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .calendario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .dia-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--dark-border);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    
+    .dia-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 194, 255, 0.2);
+    }
+    
+    .dia-data {
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    .dia-horas {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+    .dia-valor {
+      color: #4CAF50;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .dia-sem-dados {
+      opacity: 0.5;
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <!-- Sagui SVG Icon -->
+      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sagui-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00c2ff" />
+            <stop offset="100%" stop-color="#7d42f4" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#sagui-gradient)" d="M256 48c-79.5 0-144 64.5-144 144 0 33.4 11.5 64.1 30.7 88.4-24.3 21.5-39.8 52.9-40.7 88.1-.1 4.4 3.5 8 7.9 8h16.2c4.2 0 7.7-3.3 7.9-7.5 2.5-42.2 37.1-75.5 79.5-75.5h84.9c42.4 0 77 33.3 79.5 75.5.2 4.2 3.7 7.5 7.9 7.5H403c4.4 0 8-3.6 7.9-8-.9-35.2-16.4-66.6-40.7-88.1C389.5 256.1 401 225.4 401 192c0-79.5-64.5-144-144-144zm0 224c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
+      </svg>
+    </div>
+    <h2>SAGUI DIGITAL - Registro de Atividade</h2>
+  </header>
+
+  <main>
+    <div class="button-group">
+      <button type="button" id="add-row-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Adicionar Nova Linha
+      </button>
+      <button type="button" id="import-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Importar Dados
+      </button>
+      <button type="button" id="save-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+        Salvar Como
+      </button>
+      <button type="button" id="save-local-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+        Salvar no JSON Local
+      </button>
+      <button type="button" id="save-pdf-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        Salvar como PDF
+      </button>
+      <button type="button" id="save-word-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <path d="M10 12h4"></path>
+          <path d="M10 16h4"></path>
+          <path d="M8 12v8"></path>
+          <path d="M16 12v8"></path>
+        </svg>
+        Salvar como Word
+      </button>
+      <button type="button" id="clear-btn" class="warning">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        Limpar Lista
+      </button>
+      <button type="button" id="restore-btn" class="secondary" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+        </svg>
+        Restaurar Lista
+      </button>
+    </div>
+    
+    <div id="arquivo-atual">Nenhum arquivo carregado</div>
+    
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+
+    <form>
+      <table>
+        <thead>
+          <tr>
+            <th id="h-descricao">DESCRIÇÃO</th>
+            <th id="h-data">DATA</th>
+            <th id="h-inicio">INÍCIO</th>
+            <th id="h-fim">FIM</th>
+            <th id="h-concluido">CONCLUÍDO</th>
+            <th id="h-horas">HORAS</th>
+            <th id="h-valor">VALOR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- As linhas serão carregadas aqui pelo JavaScript -->
+        </tbody>
+      </table>
+    </form>
+
+    <div id="total-geral">
+      <span>Total Geral: </span>
+      <span id="total-valor">R$ 0,00</span>
+      <br>
+      <span>VALOR COM NOTA DE TERCEIROS (-5%): </span>
+      <span id="total-nota-terceiros">R$ 0,00</span>
+      <br>
+      <span>CAMPO VALOR DA NOTA (-95%): </span>
+      <span id="total-valor-nota">R$ 0,00</span>
+    </div>
+    
+    <!-- Calendário de Resumo Diário -->
+    <div id="calendario-resumo" class="calendario-container">
+      <h3>Resumo Diário - Horas Trabalhadas e Ganhos</h3>
+      <div id="calendario-grid" class="calendario-grid">
+        <!-- O calendário será gerado dinamicamente aqui -->
+      </div>
+    </div>
+    
+    <div class="status-message" id="status-message"></div>
+  </main>
+
+  <!-- Modal de confirmação para limpar lista -->
+  <div class="modal" id="confirm-modal">
+    <div class="modal-content">
+      <h3 class="modal-title">Confirmar Limpeza</h3>
+      <p>Tem certeza que deseja limpar toda a lista? Esta ação não pode ser desfeita.</p>
+      <div class="modal-buttons">
+        <button type="button" id="confirm-clear" class="warning">Sim, Limpar</button>
+        <button type="button" id="cancel-clear" class="secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sagui decorative icon -->
+  <div class="sagui-icon">
+    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#333" d="M256 48c-79.5 0-144 64.5-144 144 0 33.4 11.5 64.1 30.7 88.4-24.3 21.5-39.8 52.9-40.7 88.1-.1 4.4 3.5 8 7.9 8h16.2c4.2 0 7.7-3.3 7.9-7.5 2.5-42.2 37.1-75.5 79.5-75.5h84.9c42.4 0 77 33.3 79.5 75.5.2 4.2 3.7 7.5 7.9 7.5H403c4.4 0 8-3.6 7.9-8-.9-35.2-16.4-66.6-40.7-88.1C389.5 256.1 401 225.4 401 192c0-79.5-64.5-144-144-144zm0 224c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"/>
+    </svg>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tableBody = document.querySelector('table tbody');
+      const addRowBtn = document.getElementById('add-row-btn');
+      const taxaPorHora = 10.00;
+      const statusMessage = document.getElementById('status-message');
+      const arquivoAtualElement = document.getElementById('arquivo-atual');
+      const jsonLocalFilename = 'registros_sagui.json';
+      const confirmModal = document.getElementById('confirm-modal');
+      const clearBtn = document.getElementById('clear-btn');
+      const confirmClearBtn = document.getElementById('confirm-clear');
+      const cancelClearBtn = document.getElementById('cancel-clear');
+      const restoreBtn = document.getElementById('restore-btn');
+      
+      // Variável para armazenar o caminho do arquivo atual
+      let arquivoAtual = jsonLocalFilename;
+      
+      // Variável para armazenar a lista anterior (para restauração)
+      let listaAnterior = null;
+
+      // --- FUNÇÕES DE SALVAMENTO E CARREGAMENTO ---
+
+      // Função para mostrar mensagem de status
+      function mostrarStatus(mensagem) {
+        statusMessage.textContent = mensagem;
+        statusMessage.classList.add('visible');
+        setTimeout(() => {
+          statusMessage.classList.remove('visible');
+        }, 3000);
+      }
+
+      // Função para atualizar o nome do arquivo atual
+      function atualizarNomeArquivo(nome) {
+        arquivoAtual = nome;
+        arquivoAtualElement.textContent = nome ? `Arquivo atual: ${nome}` : 'Nenhum arquivo carregado';
+      }
+
+      // Função para salvar todos os dados da tabela
+      function salvarRegistros() {
+        const linhas = [];
+        tableBody.querySelectorAll('tr').forEach(row => {
+          const linha = {
+            descricao: row.querySelector('.descricao').value,
+            data: row.querySelector('.data').value,
+            inicio: row.querySelector('.inicio-time').value,
+            fim: row.querySelector('.fim-time').value,
+            concluido: row.querySelector('.concluido').value,
+          };
+          linhas.push(linha);
+        });
+        
+        // Salva no localStorage como backup
+        localStorage.setItem('registrosSagui', JSON.stringify(linhas));
+        return linhas;
+      }
+
+      // Função para salvar no arquivo JSON local (registros_sagui.json)
+      function salvarNoArquivoLocal() {
+        const dados = JSON.stringify(salvarRegistros(), null, 2); // Formatado para melhor leitura
+        
+        // Usando a File System Access API (navegadores modernos)
+        if ('showSaveFilePicker' in window) {
+          window.showSaveFilePicker({
+            suggestedName: jsonLocalFilename,
+            types: [{
+              description: 'Arquivos JSON',
+              accept: {'application/json': ['.json']}
+            }],
+          }).then(fileHandle => {
+            fileHandle.createWritable().then(writable => {
+              writable.write(dados).then(() => {
+                writable.close().then(() => {
+                  mostrarStatus(`Dados salvos com sucesso em ${jsonLocalFilename}!`);
+                  atualizarNomeArquivo(jsonLocalFilename);
+                });
+              });
+            });
+          }).catch(err => {
+            console.error('Erro ao salvar:', err);
+            // Fallback para o método tradicional
+            exportarParaArquivo(jsonLocalFilename);
+          });
+        } else {
+          // Navegadores que não suportam File System Access API
+          exportarParaArquivo(jsonLocalFilename);
+        }
+      }
+
+      // Função para salvar como (escolher local)
+      function salvarComo() {
+        if ('showSaveFilePicker' in window) {
+          const dados = JSON.stringify(salvarRegistros(), null, 2);
+          window.showSaveFilePicker({
+            suggestedName: arquivoAtual || jsonLocalFilename,
+            types: [{
+              description: 'Arquivos JSON',
+              accept: {'application/json': ['.json']}
+            }],
+          }).then(fileHandle => {
+            window.fileHandleCache = fileHandle;
+            fileHandle.createWritable().then(writable => {
+              writable.write(dados).then(() => {
+                writable.close().then(() => {
+                  // Obtém o nome do arquivo salvo
+                  fileHandle.getFile().then(file => {
+                    atualizarNomeArquivo(file.name);
+                    mostrarStatus(`Dados salvos com sucesso em ${file.name}!`);
+                  });
+                });
+              });
+            });
+          }).catch(err => {
+            console.error('Erro ao salvar:', err);
+          });
+        } else {
+          // Navegadores que não suportam File System Access API
+          exportarParaArquivo();
+        }
+      }
+
+      // Função para exportar os dados para um arquivo JSON (método tradicional)
+      function exportarParaArquivo(nomeArquivo = arquivoAtual || jsonLocalFilename) {
+        const dados = JSON.stringify(salvarRegistros(), null, 2);
+        const blob = new Blob([dados], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = nomeArquivo;
+        a.click();
+        URL.revokeObjectURL(url);
+        mostrarStatus(`Dados exportados com sucesso para ${nomeArquivo}!`);
+        atualizarNomeArquivo(nomeArquivo);
+      }
+
+      // Função para importar os dados de um arquivo JSON
+      async function importarDados(event) {
+        const file = event.target.files[0];
+        if (file) {
+          // Armazena o nome do arquivo atual
+          atualizarNomeArquivo(file.name);
+          
+          // Tenta obter o FileSystemFileHandle para uso posterior
+          if ('showOpenFilePicker' in window) {
+            try {
+              const [fileHandle] = await window.showOpenFilePicker({
+                types: [{
+                  description: 'Arquivos JSON',
+                  accept: {'application/json': ['.json']}
+                }],
+                multiple: false
+              });
+              window.fileHandleCache = fileHandle;
+            } catch (err) {
+              console.log('Usuário cancelou ou navegador não suporta API:', err);
+            }
+          }
+          
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const dados = e.target.result;
+            localStorage.setItem('registrosSagui', dados);
+            // Recarrega a tabela
+            tableBody.innerHTML = '';
+            carregarRegistros();
+            atualizarCalendarioResumo();
+            mostrarStatus('Dados importados com sucesso!');
+          };
+          reader.readAsText(file);
+        }
+      }
+
+      // Função para carregar os dados do localStorage
+      function carregarRegistros() {
+        const registrosSalvos = JSON.parse(localStorage.getItem('registrosSagui'));
+        if (registrosSalvos && registrosSalvos.length > 0) {
+          registrosSalvos.forEach(registro => {
+            adicionarLinha(registro, false); // Adiciona sem salvar novamente
+          });
+        } else {
+          // Se não houver nada salvo, adiciona uma linha em branco
+          adicionarLinha();
+        }
+        calcularTotal(); // Isso também chamará atualizarCalendarioResumo()
+      }
+
+      // --- FUNÇÕES PARA LIMPAR E RESTAURAR LISTA ---
+      
+      // Função para limpar a lista
+      function limparLista() {
+        // Salva a lista atual antes de limpar
+        listaAnterior = JSON.parse(localStorage.getItem('registrosSagui'));
+        
+        // Limpa a tabela
+        tableBody.innerHTML = '';
+        
+        // Adiciona uma linha em branco
+        adicionarLinha();
+        
+        // Salva a lista vazia
+        salvarRegistros();
+        
+        // Atualiza o total
+        calcularTotal();
+        
+        // Habilita o botão de restaurar
+        restoreBtn.disabled = false;
+        
+        mostrarStatus('Lista limpa com sucesso!');
+      }
+      
+      // Função para restaurar a lista anterior
+      function restaurarLista() {
+        if (listaAnterior) {
+          // Limpa a tabela atual
+          tableBody.innerHTML = '';
+          
+          // Restaura os dados da lista anterior
+          localStorage.setItem('registrosSagui', JSON.stringify(listaAnterior));
+          
+          // Carrega os registros
+          carregarRegistros();
+          
+          // Desabilita o botão de restaurar
+          restoreBtn.disabled = true;
+          
+          // Limpa a lista anterior
+          listaAnterior = null;
+          
+          mostrarStatus('Lista anterior restaurada com sucesso!');
+        }
+      }
+
+      // --- FIM DAS FUNÇÕES DE SALVAMENTO E CARREGAMENTO ---
+
+      // Função para calcular o total geral
+      function calcularTotal() {
+        let total = 0;
+        document.querySelectorAll('.valor-linha').forEach(input => {
+          const valorString = input.value;
+          if (valorString) {
+            const valorNumerico = parseFloat(valorString.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+            if (!isNaN(valorNumerico)) total += valorNumerico;
+          }
+        });
+        document.getElementById('total-valor').textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Calcula o valor com nota de terceiros (desconto de 5%)
+        const valorNotaTerceiros = total * 0.95; // 100% - 5% = 95%
+        document.getElementById('total-nota-terceiros').textContent = valorNotaTerceiros.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Calcula o campo valor da nota (desconto de 95%)
+        const valorNota = total * 0.05; // 100% - 95% = 5%
+        document.getElementById('total-valor-nota').textContent = valorNota.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        // Atualiza o calendário de resumo diário
+        atualizarCalendarioResumo();
+      }
+
+      // Função para calcular horas e ganhos por dia e atualizar o calendário
+      function atualizarCalendarioResumo() {
+        const resumoPorDia = {};
+        
+        // Coleta dados de cada linha da tabela
+        tableBody.querySelectorAll('tr').forEach(row => {
+          const data = row.querySelector('.data').value;
+          const horas = row.querySelector('.horas-total').value;
+          const valor = row.querySelector('.valor-linha').value;
+          
+          if (data && horas && valor) {
+            if (!resumoPorDia[data]) {
+              resumoPorDia[data] = {
+                totalHoras: 0,
+                totalValor: 0,
+                quantidadeRegistros: 0
+              };
+            }
+            
+            // Converte horas para número decimal (ex: 02:30:00 -> 2.5)
+            const [horasStr, minutosStr, segundosStr] = horas.split(':');
+            const horasDecimais = parseInt(horasStr) + parseInt(minutosStr) / 60 + parseInt(segundosStr) / 3600;
+            
+            // Converte valor para número
+            const valorNumerico = parseFloat(valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+            
+            resumoPorDia[data].totalHoras += horasDecimais;
+            resumoPorDia[data].totalValor += valorNumerico;
+            resumoPorDia[data].quantidadeRegistros++;
+          }
+        });
+        
+        // Ordena as datas
+        const datasOrdenadas = Object.keys(resumoPorDia).sort();
+        
+        // Gera o HTML do calendário
+        const calendarioGrid = document.getElementById('calendario-grid');
+        calendarioGrid.innerHTML = '';
+        
+        if (datasOrdenadas.length === 0) {
+          calendarioGrid.innerHTML = '<div class="dia-sem-dados">Nenhum registro encontrado</div>';
+          return;
+        }
+        
+        // Cria um card para cada dia
+        datasOrdenadas.forEach(data => {
+          const resumo = resumoPorDia[data];
+          // Corrigir problema de fuso horário ao formatar a data
+          const [ano, mes, dia] = data.split('-');
+          const dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+          
+          const diaCard = document.createElement('div');
+          diaCard.className = 'dia-card';
+          diaCard.innerHTML = `
+            <div class="dia-data">${dataFormatada}</div>
+            <div class="dia-horas">Horas: ${resumo.totalHoras.toFixed(2)}h</div>
+            <div class="dia-valor">${resumo.totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
+          `;
+          
+          calendarioGrid.appendChild(diaCard);
+        });
+      }
+
+      function calcularLinha(rowElement) {
+        const inicioInput = rowElement.querySelector('.inicio-time');
+        const fimInput = rowElement.querySelector('.fim-time');
+        const horasInput = rowElement.querySelector('.horas-total');
+        const valorInput = rowElement.querySelector('.valor-linha');
+        
+        const inicioValue = inicioInput.value;
+        const fimValue = fimInput.value;
+
+        if (inicioValue && fimValue) {
+          const dataInicio = new Date(`2000-01-01T${inicioValue}`);
+          const dataFim = new Date(`2000-01-01T${fimValue}`);
+          let diffMs = dataFim - dataInicio;
+          if (diffMs < 0) diffMs += 24 * 60 * 60 * 1000;
+
+          const hours = Math.floor(diffMs / 3600000);
+          const minutes = Math.floor((diffMs % 3600000) / 60000);
+          const seconds = Math.floor(((diffMs % 3600000) % 60000) / 1000);
+          const pad = (num) => num.toString().padStart(2, '0');
+          horasInput.value = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+          const diffHorasDecimal = diffMs / 3600000;
+          const valorCalculado = diffHorasDecimal * taxaPorHora;
+          valorInput.value = valorCalculado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        } else {
+          horasInput.value = '00:00:00';
+          valorInput.value = (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+        calcularTotal();
+        salvarRegistros(); // Salva sempre que uma linha é recalculada
+      }
+
+      // Função para adicionar uma nova linha
+      function adicionarLinha(dados = {}, salvar = true) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td><input type="text" class="descricao" value="${dados.descricao || ''}" aria-labelledby="h-descricao"></td>
+          <td><input type="date" class="data" value="${dados.data || ''}" aria-labelledby="h-data"></td>
+          <td><input type="time" class="inicio-time" value="${dados.inicio || ''}" step="1" aria-labelledby="h-inicio"></td>
+          <td><input type="time" class="fim-time" value="${dados.fim || ''}" step="1" aria-labelledby="h-fim"></td>
+          <td>
+            <div class="opcoes-container">
+              <label class="opcao-checkbox">
+                <input type="checkbox" class="opcao-concluido" value="PEDESTRE" ${dados.concluido && dados.concluido.includes('PEDESTRE') ? 'checked' : ''}>
+                <span class="checkmark">PEDESTRE</span>
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" class="opcao-concluido" value="CARRO" ${dados.concluido && dados.concluido.includes('CARRO') ? 'checked' : ''}>
+                <span class="checkmark">CARRO</span>
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" class="opcao-concluido" value="NOITE" ${dados.concluido && dados.concluido.includes('NOITE') ? 'checked' : ''}>
+                <span class="checkmark">NOITE</span>
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" class="opcao-concluido" value="DIA" ${dados.concluido && dados.concluido.includes('DIA') ? 'checked' : ''}>
+                <span class="checkmark">DIA</span>
+              </label>
+              <label class="opcao-checkbox">
+                <input type="checkbox" class="opcao-concluido" value="FOTOS" ${dados.concluido && dados.concluido.includes('FOTOS') ? 'checked' : ''}>
+                <span class="checkmark">FOTOS</span>
+              </label>
+              <button type="button" class="seta-botao seta-esquerda-botao" data-value="ESQUERDA" ${dados.concluido && dados.concluido.includes('ESQUERDA') ? 'data-selecionado="true"' : ''}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="seta-icon seta-esquerda-icon" width="36" height="36">
+                  <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                ESQUERDA
+              </button>
+              <button type="button" class="seta-botao seta-direita-botao" data-value="DIREITA" ${dados.concluido && dados.concluido.includes('DIREITA') ? 'data-selecionado="true"' : ''}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="seta-icon seta-direita-icon" width="36" height="36">
+                  <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="#FF0000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                DIREITA
+              </button>
+              <input type="hidden" class="concluido" value="${dados.concluido || ''}">
+            </div>
+          </td>
+          <td><input type="text" class="horas-total" aria-labelledby="h-horas" readonly></td>
+          <td><input type="text" class="valor-linha" aria-labelledby="h-valor" readonly></td>
+        `;
+        tableBody.appendChild(newRow);
+        setupRowEventListeners(newRow);
+        if (salvar) salvarRegistros();
+      }
+
+      function setupRowEventListeners(rowElement) {
+        // Calcula a linha quando início ou fim mudam
+        rowElement.querySelector('.inicio-time').addEventListener('change', () => calcularLinha(rowElement));
+        rowElement.querySelector('.fim-time').addEventListener('change', () => calcularLinha(rowElement));
+        
+        // Configura os checkboxes de opções
+        const checkboxes = rowElement.querySelectorAll('.opcao-concluido');
+        const hiddenInput = rowElement.querySelector('.concluido');
+        
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', () => {
+            // Atualiza o valor do campo oculto com as opções selecionadas
+            const selecionados = Array.from(rowElement.querySelectorAll('.opcao-concluido:checked'))
+              .map(cb => cb.value);
+            hiddenInput.value = selecionados.join(', ');
+            salvarRegistros();
+          });
+        });
+        
+        // Configura os botões de seta com efeito de piscar contínuo após clicar
+        const setaBotoes = rowElement.querySelectorAll('.seta-botao');
+        
+        setaBotoes.forEach(botao => {
+          // Atualiza estado inicial baseado no data-selecionado
+          if (botao.dataset.selecionado === 'true') {
+            botao.classList.add('selecionado');
+            // Se já estava selecionado, mantém o piscar contínuo
+            const svgIcon = botao.querySelector('.seta-icon');
+            botao.classList.add('piscando-continuo');
+            svgIcon.classList.add('piscando-continuo');
+          }
+          
+          botao.addEventListener('click', () => {
+            // Adiciona efeito de piscar ao clicar
+            const svgIcon = botao.querySelector('.seta-icon');
+            
+            // Primeiro piscar rápido
+            botao.classList.add('piscando');
+            svgIcon.classList.add('piscando');
+            
+            // Após o piscar rápido, inicia o piscar contínuo
+            setTimeout(() => {
+              botao.classList.remove('piscando');
+              svgIcon.classList.remove('piscando');
+              // Inicia piscar contínuo
+              botao.classList.add('piscando-continuo');
+              svgIcon.classList.add('piscando-continuo');
+            }, 1200);
+            
+            // Alterna seleção
+            const valor = botao.dataset.value;
+            const estaSelecionado = botao.classList.contains('selecionado');
+            
+            if (estaSelecionado) {
+              botao.classList.remove('selecionado');
+            } else {
+              botao.classList.add('selecionado');
+            }
+            
+            // Atualiza o campo oculto
+            const selecionados = Array.from(rowElement.querySelectorAll('.seta-botao.selecionado'))
+              .map(btn => btn.dataset.value);
+            
+            // Adiciona também os checkboxes normais
+            const checkboxesSelecionados = Array.from(rowElement.querySelectorAll('.opcao-concluido:checked'))
+              .map(cb => cb.value);
+            
+            hiddenInput.value = [...checkboxesSelecionados, ...selecionados].join(', ');
+            salvarRegistros();
+          });
+        });
+        
+        // Salva os dados quando qualquer outro campo é alterado
+        rowElement.querySelector('.descricao').addEventListener('change', salvarRegistros);
+        rowElement.querySelector('.data').addEventListener('change', () => {
+          salvarRegistros();
+          atualizarCalendarioResumo();
+        });
+
+        calcularLinha(rowElement); // Calcula os valores iniciais da linha
+      }
+
+      // Função para salvar como PDF
+      function salvarComoPDF() {
+        // Cria um elemento para mostrar status
+        mostrarStatus('Gerando PDF...');
+        
+        // Cria um clone da tabela para manipulação
+        const tabelaClone = document.querySelector('table').cloneNode(true);
+        
+        // Adiciona estilos específicos para impressão
+        const style = document.createElement('style');
+        style.textContent = `
+          body { font-family: Arial, sans-serif; }
+          table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+          th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+          th { background-color: #f2f2f2; }
+          h2 { text-align: center; margin-bottom: 20px; }
+        `;
+        
+        // Cria um novo documento para impressão
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>SAGUI DIGITAL - Registro de Atividade</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<h2>SAGUI DIGITAL - Registro de Atividade</h2>');
+        printWindow.document.write(tabelaClone.outerHTML);
+        printWindow.document.write('<div id="total-info">');
+        printWindow.document.write('<p><strong>Total Geral: </strong>' + document.getElementById('total-valor').textContent + '</p>');
+        printWindow.document.write('<p><strong>VALOR COM NOTA DE TERCEIROS (-5%): </strong>' + document.getElementById('total-nota-terceiros').textContent + '</p>');
+        printWindow.document.write('<p><strong>CAMPO VALOR DA NOTA (-95%): </strong>' + document.getElementById('total-valor-nota').textContent + '</p>');
+        printWindow.document.write('</div>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.head.appendChild(style);
+        
+        // Aguarda o carregamento do conteúdo
+        printWindow.document.close();
+        printWindow.onload = function() {
+          // Imprime como PDF
+          printWindow.print();
+          mostrarStatus('PDF gerado com sucesso!');
+        };
+      }
+
+      // Função para salvar como Word
+      function salvarComoWord() {
+        mostrarStatus('Gerando documento Word...');
+        
+        // Coleta todos os dados da tabela
+        const linhas = [];
+        tableBody.querySelectorAll('tr').forEach(row => {
+          const linha = {
+            descricao: row.querySelector('.descricao').value,
+            data: row.querySelector('.data').value,
+            inicio: row.querySelector('.inicio-time').value,
+            fim: row.querySelector('.fim-time').value,
+            concluido: row.querySelector('.concluido').value,
+            horas: row.querySelector('.horas-total').value,
+            valor: row.querySelector('.valor-linha').value
+          };
+          linhas.push(linha);
+        });
+
+        // Calcula resumo por dia (similar ao calendário)
+        const resumoPorDia = {};
+        linhas.forEach(linha => {
+          const data = linha.data;
+          const horas = linha.horas;
+          const valor = linha.valor;
+          
+          if (data && horas && valor) {
+            if (!resumoPorDia[data]) {
+              resumoPorDia[data] = {
+                totalHoras: 0,
+                totalValor: 0,
+                quantidadeRegistros: 0
+              };
+            }
+            
+            // Converte horas para número decimal
+            const [horasStr, minutosStr, segundosStr] = horas.split(':');
+            const horasDecimais = parseInt(horasStr) + parseInt(minutosStr) / 60 + parseInt(segundosStr) / 3600;
+            
+            // Converte valor para número
+            const valorNumerico = parseFloat(valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
+            
+            resumoPorDia[data].totalHoras += horasDecimais;
+            resumoPorDia[data].totalValor += valorNumerico;
+            resumoPorDia[data].quantidadeRegistros++;
+          }
+        });
+
+        // Cria o conteúdo HTML para o Word
+        let htmlContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head>
+            <meta charset="utf-8">
+            <title>SAGUI DIGITAL - Registro de Atividade</title>
+            <style>
+              body { font-family: 'Calibri', sans-serif; margin: 20px; }
+              h2 { color: #2E86AB; text-align: center; margin-bottom: 20px; }
+              h3 { color: #A23B72; margin-bottom: 15px; }
+              table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+              th { background-color: #A23B72; color: white; padding: 12px; text-align: center; font-weight: bold; }
+              td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+              tr:nth-child(even) { background-color: #f9f9f9; }
+              .resumo-dia-section { margin-bottom: 30px; padding: 20px; background-color: #f0f8ff; border-radius: 5px; }
+              .resumo-dia-item { margin: 8px 0; padding: 10px; background-color: white; border-left: 4px solid #2E86AB; }
+              .resumo-dia-data { font-weight: bold; color: #2E86AB; }
+              .resumo-dia-horas { color: #555; }
+              .resumo-dia-valor { font-weight: bold; color: #28a745; }
+              .total-section { margin-top: 30px; padding: 20px; background-color: #F18F01; color: white; border-radius: 5px; }
+              .total-section h3 { margin-top: 0; }
+              .total-item { margin: 10px 0; font-size: 16px; }
+              .data-geracao { text-align: right; color: #666; font-size: 12px; margin-top: 30px; }
+            </style>
+          </head>
+          <body>
+            <h2>SAGUI DIGITAL - Registro de Atividade</h2>
+            
+            <div class="resumo-dia-section">
+              <h3>Resumo de Ganhos por Dia</h3>
+        `;
+
+        // Adiciona resumo por dia
+        const datasOrdenadas = Object.keys(resumoPorDia).sort();
+        if (datasOrdenadas.length > 0) {
+          datasOrdenadas.forEach(data => {
+            const resumo = resumoPorDia[data];
+            // Formata a data corretamente
+            const [ano, mes, dia] = data.split('-');
+            const dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR');
+            
+            htmlContent += `
+              <div class="resumo-dia-item">
+                <div class="resumo-dia-data">${dataFormatada}</div>
+                <div class="resumo-dia-horas">Horas trabalhadas: ${resumo.totalHoras.toFixed(2)}h</div>
+                <div class="resumo-dia-valor">Ganho do dia: ${resumo.totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
+              </div>
+            `;
+          });
+        } else {
+          htmlContent += '<p>Nenhum registro encontrado para o resumo diário.</p>';
+        }
+
+        htmlContent += `
+            </div>
+            
+            <h3>Detalhes por Registro</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>DATA</th>
+                  <th>DESCRIÇÃO</th>
+                  <th>INÍCIO</th>
+                  <th>FIM</th>
+                  <th>CONCLUÍDO</th>
+                  <th>HORAS</th>
+                  <th>VALOR</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+
+        // Adiciona as linhas da tabela
+        linhas.forEach(linha => {
+          htmlContent += `
+            <tr>
+              <td>${linha.data || '-'}</td>
+              <td>${linha.descricao || '-'}</td>
+              <td>${linha.inicio || '-'}</td>
+              <td>${linha.fim || '-'}</td>
+              <td>${linha.concluido || '-'}</td>
+              <td>${linha.horas || '00:00:00'}</td>
+              <td>${linha.valor || 'R$ 0,00'}</td>
+            </tr>
+          `;
+        });
+
+        // Adiciona o rodapé com os totais
+        const totalGeral = document.getElementById('total-valor').textContent;
+        const totalNotaTerceiros = document.getElementById('total-nota-terceiros').textContent;
+        const totalValorNota = document.getElementById('total-valor-nota').textContent;
+        const dataGeracao = new Date().toLocaleString('pt-BR');
+
+        htmlContent += `
+              </tbody>
+            </table>
+            
+            <div class="total-section">
+              <h3>Resumo Financeiro</h3>
+              <div class="total-item"><strong>Total Geral:</strong> ${totalGeral}</div>
+              <div class="total-item"><strong>Valor com Nota de Terceiros (-5%):</strong> ${totalNotaTerceiros}</div>
+              <div class="total-item"><strong>Campo Valor da Nota (-95%):</strong> ${totalValorNota}</div>
+            </div>
+            
+            <div class="data-geracao">
+              <p>Documento gerado em: ${dataGeracao}</p>
+              <p>Sistema SAGUI DIGITAL - Registro de Atividade</p>
+            </div>
+          </body>
+          </html>
+        `;
+
+        // Cria o blob e faz o download
+        const blob = new Blob([htmlContent], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Registro_Atividade_SAGUI_${new Date().toISOString().split('T')[0]}.doc`;
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        mostrarStatus('Documento Word gerado com sucesso!');
+      }
+      
+      // Event listeners para os botões
+      addRowBtn.addEventListener('click', () => adicionarLinha());
+      document.getElementById('save-btn').addEventListener('click', salvarComo);
+      document.getElementById('save-local-btn').addEventListener('click', salvarNoArquivoLocal);
+      document.getElementById('save-pdf-btn').addEventListener('click', salvarComoPDF);
+      document.getElementById('save-word-btn').addEventListener('click', salvarComoWord);
+      document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+      document.getElementById('import-file').addEventListener('change', importarDados);
+      
+      // Event listeners para limpar e restaurar lista
+      clearBtn.addEventListener('click', () => {
+        confirmModal.classList.add('active');
+      });
+      
+      confirmClearBtn.addEventListener('click', () => {
+        limparLista();
+        confirmModal.classList.remove('active');
+      });
+      
+      cancelClearBtn.addEventListener('click', () => {
+        confirmModal.classList.remove('active');
+      });
+      
+      restoreBtn.addEventListener('click', restaurarLista);
+
+      // Salva os dados antes de fechar a página
+      window.addEventListener('beforeunload', () => {
+        // Salva no localStorage
+        salvarRegistros();
+        
+        // Tenta salvar no arquivo local se estiver usando esse arquivo
+        if (arquivoAtual === jsonLocalFilename && window.fileHandleCache) {
+          try {
+            const dados = JSON.stringify(salvarRegistros());
+            window.fileHandleCache.createWritable().then(writable => {
+              writable.write(dados).then(() => writable.close());
+            });
+          } catch (err) {
+            console.error('Erro ao salvar antes de fechar:', err);
+          }
+        }
+      });
+
+      // --- PONTO DE PARTIDA ---
+      
+      // Função para salvar automaticamente a cada 3 segundos
+      function iniciarSalvamentoAutomatico() {
+        setInterval(() => {
+          const dados = JSON.stringify(salvarRegistros(), null, 2);
+          
+          // Salva no arquivo local apenas se tiver acesso direto ao arquivo
+          if (window.fileHandleCache) {
+            window.fileHandleCache.createWritable().then(writable => {
+              writable.write(dados).then(() => writable.close());
+            }).catch(err => {
+              console.error('Erro ao salvar automaticamente:', err);
+            });
+          }
+          
+          // Sempre salva no localStorage como backup
+          localStorage.setItem('registrosSaguiBackup', dados);
+          
+          // Não tenta fazer download do arquivo automaticamente
+        }, 3000); // Salva a cada 3 segundos
+      }
+      
+      // Tenta carregar o arquivo registros_sagui.json automaticamente ao iniciar
+      fetch(jsonLocalFilename)
+        .then(response => {
+          if (response.ok) return response.json();
+          throw new Error('Arquivo não encontrado');
+        })
+        .then(data => {
+          localStorage.setItem('registrosSagui', JSON.stringify(data));
+          tableBody.innerHTML = '';
+          carregarRegistros();
+          atualizarNomeArquivo(jsonLocalFilename);
+          mostrarStatus('Dados carregados automaticamente do arquivo local!');
+          
+          // Inicia o salvamento automático
+          iniciarSalvamentoAutomatico();
+          
+          // Tenta obter acesso ao arquivo para salvamento posterior
+          if ('showOpenFilePicker' in window) {
+            navigator.serviceWorker.register('sw.js').then(() => {
+              console.log('Service Worker registrado para acesso ao arquivo');
+            }).catch(err => {
+              console.log('Erro ao registrar Service Worker:', err);
+            });
+          }
+        })
+        .catch(err => {
+          console.log('Nenhum arquivo local encontrado:', err);
+          // Carrega do localStorage se não encontrar o arquivo
+          carregarRegistros();
+          
+          // Inicia o salvamento automático mesmo sem arquivo inicial
+          iniciarSalvamentoAutomatico();
+        });
+    });
+  </script>
+</body>
+</html>
