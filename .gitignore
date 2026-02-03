@@ -1,0 +1,11 @@
+# Editor
+.vscode/
+.idea/
+
+# Arquivos gerados
+*.pdf
+*.doc
+*.docx
+
+# Logs
+*.log
