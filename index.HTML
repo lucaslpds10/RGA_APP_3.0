@@ -501,7 +501,7 @@
       </div>
     </div>
     
-    <div class="status-message" id="status-message"></div>
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
@@ -884,7 +884,7 @@
       function adicionarLinha(dados = {}, salvar = true) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-          <td><input type="text" class="descricao" value="${dados.descricao || ''}" aria-labelledby="h-descricao"></td>
+          <td><input type="text" class="descricao" value="${dados.descricao || ''}" aria-labelledby="h-descricao" placeholder="Ex: Projeto, Tarefa..."></td>
           <td><input type="date" class="data" value="${dados.data || ''}" aria-labelledby="h-data"></td>
           <td><input type="time" class="inicio-time" value="${dados.inicio || ''}" step="1" aria-labelledby="h-inicio"></td>
           <td><input type="time" class="fim-time" value="${dados.fim || ''}" step="1" aria-labelledby="h-fim"></td>
