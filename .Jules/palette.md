@@ -1,0 +1,3 @@
+## 2023-10-24 - Accessibility for Toast Messages and Helpful Input Placeholders
+**Learning:** Found that toast messages (dynamically appearing status updates like "Saved") were completely invisible to screen readers without `role="status"` and `aria-live="polite"`. The primary text input for items also lacked an example placeholder, which can leave users guessing what format to enter.
+**Action:** Always verify if dynamically updated text areas meant to notify the user have the necessary ARIA live regions so screen reader users aren't left behind. Also, add placeholders to ambiguous inputs to improve immediate discoverability.
