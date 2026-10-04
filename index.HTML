@@ -134,6 +134,11 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
     }
+
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
     
     button svg {
       width: 18px;
@@ -501,13 +506,13 @@
       </div>
     </div>
     
-    <div class="status-message" id="status-message"></div>
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
-  <div class="modal" id="confirm-modal">
+  <div class="modal" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-content">
-      <h3 class="modal-title">Confirmar Limpeza</h3>
+      <h3 class="modal-title" id="modal-title">Confirmar Limpeza</h3>
       <p>Tem certeza que deseja limpar toda a lista? Esta ação não pode ser desfeita.</p>
       <div class="modal-buttons">
         <button type="button" id="confirm-clear" class="warning">Sim, Limpar</button>
