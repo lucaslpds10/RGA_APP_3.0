@@ -1,0 +1,3 @@
+## 2024-10-06 - Enhancing Button States and Inputs
+**Learning:** Disabled buttons without visual feedback (like opacity reduction or cursor changes) can be highly confusing for users. Additionally, relying solely on table headers for context might not be enough; placeholders provide immediate context within empty inputs. Using `:focus-visible` ensures keyboard users receive clear indicators of their current selection.
+**Action:** Always implement `:disabled`, `:focus-visible`, and standard `:hover` exclusions (e.g., `:not(:disabled):hover`) in the global button styles of the app to guarantee consistent accessibility.

@@ -130,7 +130,19 @@
       transition: all 0.2s;
     }
     
-    button:hover {
+    button:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    button:not(:disabled):hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
     }
@@ -884,7 +896,7 @@
       function adicionarLinha(dados = {}, salvar = true) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-          <td><input type="text" class="descricao" value="${dados.descricao || ''}" aria-labelledby="h-descricao"></td>
+          <td><input type="text" class="descricao" placeholder="Descreva a atividade..." value="${dados.descricao || ''}" aria-labelledby="h-descricao"></td>
           <td><input type="date" class="data" value="${dados.data || ''}" aria-labelledby="h-data"></td>
           <td><input type="time" class="inicio-time" value="${dados.inicio || ''}" step="1" aria-labelledby="h-inicio"></td>
           <td><input type="time" class="fim-time" value="${dados.fim || ''}" step="1" aria-labelledby="h-fim"></td>
