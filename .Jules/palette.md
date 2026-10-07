@@ -1,0 +1,3 @@
+## 2024-05-24 - Missing Disabled States
+**Learning:** Found that `button:disabled` states were completely missing from the custom CSS, resulting in the "Restaurar Lista" button looking active and interactive (with hover animations) even when it functionally couldn't be clicked. This is confusing for users and particularly bad for accessibility as there is no visual cue of the disabled state.
+**Action:** Added `button:disabled` (opacity + cursor), `button:disabled:hover` (removing animations), and `button:focus-visible` (keyboard focus rings) styles to CSS. Always check that all interactive states (default, hover, active, focus, disabled) are styled when building custom buttons.
