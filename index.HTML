@@ -135,7 +135,12 @@
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
     }
     
-    button svg {
+        button:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+button svg {
       width: 18px;
       height: 18px;
     }
@@ -505,9 +510,9 @@
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
-  <div class="modal" id="confirm-modal">
+  <div class="modal" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-content">
-      <h3 class="modal-title">Confirmar Limpeza</h3>
+      <h3 id="modal-title" class="modal-title">Confirmar Limpeza</h3>
       <p>Tem certeza que deseja limpar toda a lista? Esta ação não pode ser desfeita.</p>
       <div class="modal-buttons">
         <button type="button" id="confirm-clear" class="warning">Sim, Limpar</button>
@@ -1240,15 +1245,19 @@
       // Event listeners para limpar e restaurar lista
       clearBtn.addEventListener('click', () => {
         confirmModal.classList.add('active');
+        // Set focus to the secondary action when modal opens
+        setTimeout(() => cancelClearBtn.focus(), 50);
       });
       
       confirmClearBtn.addEventListener('click', () => {
         limparLista();
         confirmModal.classList.remove('active');
+        clearBtn.focus();
       });
       
       cancelClearBtn.addEventListener('click', () => {
         confirmModal.classList.remove('active');
+        clearBtn.focus();
       });
       
       restoreBtn.addEventListener('click', restaurarLista);

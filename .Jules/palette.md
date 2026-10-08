@@ -1,0 +1,4 @@
+
+## 2026-10-08 - Custom Modal Accessibility and Focus Management
+**Learning:** Custom modal dialogs present a significant accessibility barrier if not properly implemented. They require a `role="dialog"` attribute, `aria-modal="true"`, and appropriate labeling (e.g., `aria-labelledby`). Crucially, they require manual focus management: focus must be shifted into the modal (preferably to a non-destructive element like "Cancel") when opened, and must be returned to the triggering element when closed, so keyboard and screen reader users do not lose their place.
+**Action:** When implementing custom modals, always include standard ARIA attributes (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`) and manage focus via JavaScript on open and close events. Use a brief timeout to set focus when the modal opens to allow DOM rendering. Ensure interactive elements like buttons have visible focus indicators (`:focus-visible`).
