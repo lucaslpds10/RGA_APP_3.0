@@ -1,0 +1,3 @@
+## 2024-05-18 - Keyboard Navigation & Disabled State Explanations
+**Learning:** Adding `:focus-visible` to custom styled buttons and inputs is vital for keyboard users to know their current focus, as default outlines are often overridden or removed. Also, disabling a button without explaining *why* it's disabled creates a frustrating UX, especially for screen readers or users exploring options.
+**Action:** Always add `:focus-visible` styles using theme colors when styling interactive elements, and add `title` (and ideally `aria-disabled`/`aria-describedby` when possible, though `title` is a good quick fix) to explain disabled states and dynamically update them.
