@@ -1,0 +1,7 @@
+## 2024-03-21 - Dynamic Form Row Focus Flow
+**Learning:** When a user dynamically adds a new row to a form grid (like clicking "Adicionar Nova Linha"), they expect to immediately start typing in that new row. Without auto-focusing the first input field, the user is forced to perform an extra mouse click or multiple tab presses to reach the new input, which breaks their flow and is particularly cumbersome for keyboard-only navigation.
+**Action:** Always auto-focus the first interactive element (usually the first input field) of newly generated UI content, especially in dynamically added list/table rows. Ensure this is done immediately after appending the element to the DOM.
+
+## 2024-03-21 - Polite Toast Announcements
+**Learning:** Custom status toasts (like "Dados salvos com sucesso!") are completely invisible to screen reader users if they just appear visually using CSS. Using `role="status"` combined with `aria-live="polite"` ensures the screen reader catches and announces these temporary feedback messages without aggressively interrupting the user.
+**Action:** When creating custom toast notification components, always apply `role="status"` and `aria-live="polite"` to the container.
