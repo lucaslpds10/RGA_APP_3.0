@@ -15,7 +15,7 @@
       --text-primary: #ffffff;
       --text-secondary: #b0b0b0;
     }
-    
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -25,7 +25,7 @@
       background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiMzMzMiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==');
       background-attachment: fixed;
     }
-    
+
     header {
       display: flex;
       align-items: center;
@@ -33,16 +33,16 @@
       padding-bottom: 15px;
       border-bottom: 1px solid var(--dark-border);
     }
-    
+
     .logo {
       margin-right: 20px;
     }
-    
+
     .logo svg {
       width: 50px;
       height: 50px;
     }
-    
+
     h2 {
       margin: 0;
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
@@ -51,14 +51,14 @@
       color: transparent;
       font-size: 28px;
     }
-    
+
     main {
       background-color: var(--dark-surface);
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -66,13 +66,13 @@
       border-radius: 8px;
       overflow: hidden;
     }
-    
+
     th, td {
       border: 1px solid var(--dark-border);
       padding: 12px 8px;
       text-align: center;
     }
-    
+
     th {
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       color: var(--text-primary);
@@ -81,11 +81,11 @@
       font-size: 14px;
       letter-spacing: 1px;
     }
-    
+
     tr:nth-child(even) {
       background-color: rgba(255, 255, 255, 0.03);
     }
-    
+
     input[type="text"], input[type="time"], input[type="date"] {
       width: 100%;
       box-sizing: border-box;
@@ -99,23 +99,24 @@
       color: inherit;
        border-bottom: 1px solid var(--dark-border);
     }
-    
+
     input:focus {
       outline: none;
       border-bottom-color: var(--primary-color);
     }
-    
+
     input[readonly] {
       opacity: 0.7;
+      cursor: not-allowed;
     }
-    
+
     .button-group {
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
-    
+
     button {
       background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       border: none;
@@ -129,17 +130,17 @@
       gap: 8px;
       transition: all 0.2s;
     }
-    
+
     button:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
     }
-    
+
     button svg {
       width: 18px;
       height: 18px;
     }
-    
+
     #total-geral {
       margin-top: 20px;
       font-size: 18px;
@@ -148,7 +149,7 @@
       padding: 15px;
       border-top: 1px solid var(--dark-border);
     }
-    
+
     .status-message {
       position: fixed;
       bottom: 20px;
@@ -163,11 +164,11 @@
       justify-content: center;
       align-items: center;
     }
-    
+
     .status-message.visible {
       transform: translateX(-50%) translateY(0);
     }
-    
+
     .modal {
       position: fixed;
       top: 0;
@@ -180,11 +181,11 @@
       align-items: center;
       z-index: 2000;
     }
-    
+
     .modal.active {
       display: flex;
     }
-    
+
     .modal-content {
       background-color: var(--dark-surface);
       padding: 30px;
@@ -194,81 +195,81 @@
       width: 90%;
       text-align: center;
     }
-    
+
     .modal-title {
       margin-top: 0;
       color: var(--warning-color);
     }
-    
+
     /* Estilos para as setas amarelas */
     .seta-container {
       position: relative;
     }
-    
+
     .seta-icon {
       vertical-align: middle;
       margin-right: 5px;
     }
-    
+
     input.seta-esquerda:checked + .checkmark .seta-esquerda-icon,
     input.seta-direita:checked + .checkmark .seta-direita-icon {
       animation: piscar-seta 1s ease-in-out infinite;
       pointer-events: auto;
     }
-    
+
     input.seta-esquerda:checked + .checkmark,
     input.seta-direita:checked + .checkmark {
       animation: piscar-texto 1s ease-in-out infinite;
     }
-    
+
     /* Garantir que os campos permaneçam editáveis */
     input, select, textarea {
       pointer-events: auto !important;
     }
-    
+
     @keyframes piscar-seta {
       0%, 100% { stroke: #FFD700; }
       50% { stroke: #FF0000; }
     }
-    
+
     @keyframes piscar-texto {
       0%, 100% { color: inherit; }
       50% { color: #FF0000; }
     }
-    
+
     /* Animação de piscar para setas */
         @keyframes piscar {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.8; transform: scale(1.05); }
         }
-        
+
         .piscando {
           animation: piscar 0.6s ease-in-out 2;
         }
-        
+
         /* Animação contínua para botões sempre piscando */
         @keyframes piscarContinuo {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.9; transform: scale(1.02); }
         }
-        
+
         .piscando-continuo {
           animation: piscarContinuo 1.5s ease-in-out infinite;
         }
-        
+
         /* Mantém a letra sempre visível durante o piscar */
         .seta-botao.piscando,
         .seta-botao.piscando-continuo {
           color: white !important;
           text-shadow: 0 0 3px rgba(0,0,0,0.8);
         }
-        
+
         .seta-botao.piscando .seta-icon path,
         .seta-botao.piscando-continuo .seta-icon path {
           stroke: white !important;
           filter: drop-shadow(0 0 2px rgba(0,0,0,0.8));
         }
-    
+
     /* Estilo para botões de seta clicáveis */
         .seta-botao {
           background: none;
@@ -283,32 +284,32 @@
           font-size: 12px;
           color: #FF0000;
         }
-        
+
         .seta-botao:hover {
           background-color: rgba(255, 0, 0, 0.1);
           transform: translateY(-1px);
         }
-        
+
         .seta-botao:active {
           transform: translateY(0);
         }
-        
+
         .seta-botao.selecionado {
           background-color: #FF0000;
           color: white;
         }
-        
+
         .seta-botao.selecionado .seta-icon path {
           stroke: white;
         }
-    
+
     .modal-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
       margin-top: 20px;
     }
-    
+
     /* Estilos para o Calendário de Resumo Diário */
     .calendario-container {
       margin-top: 30px;
@@ -317,20 +318,20 @@
       padding: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     .calendario-container h3 {
       margin-top: 0;
       color: var(--primary-color);
       text-align: center;
       margin-bottom: 20px;
     }
-    
+
     .calendario-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 15px;
     }
-    
+
     .dia-card {
       background-color: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--dark-border);
@@ -339,31 +340,31 @@
       text-align: center;
       transition: transform 0.2s ease;
     }
-    
+
     .dia-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.2);
     }
-    
+
     .dia-data {
       font-weight: bold;
       color: var(--primary-color);
       font-size: 16px;
       margin-bottom: 10px;
     }
-    
+
     .dia-horas {
       color: var(--text-secondary);
       font-size: 14px;
       margin-bottom: 5px;
     }
-    
+
     .dia-valor {
       color: #4CAF50;
       font-weight: bold;
       font-size: 16px;
     }
-    
+
     .dia-sem-dados {
       opacity: 0.5;
       text-align: center;
@@ -458,9 +459,9 @@
         Restaurar Lista
       </button>
     </div>
-    
+
     <div id="arquivo-atual">Nenhum arquivo carregado</div>
-    
+
     <input type="file" id="import-file" accept=".json" style="display: none;">
 
     <form>
@@ -492,7 +493,7 @@
       <span>CAMPO VALOR DA NOTA (-95%): </span>
       <span id="total-valor-nota">R$ 0,00</span>
     </div>
-    
+
     <!-- Calendário de Resumo Diário -->
     <div id="calendario-resumo" class="calendario-container">
       <h3>Resumo Diário - Horas Trabalhadas e Ganhos</h3>
@@ -500,8 +501,8 @@
         <!-- O calendário será gerado dinamicamente aqui -->
       </div>
     </div>
-    
-    <div class="status-message" id="status-message"></div>
+
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
@@ -536,10 +537,10 @@
       const confirmClearBtn = document.getElementById('confirm-clear');
       const cancelClearBtn = document.getElementById('cancel-clear');
       const restoreBtn = document.getElementById('restore-btn');
-      
+
       // Variável para armazenar o caminho do arquivo atual
       let arquivoAtual = jsonLocalFilename;
-      
+
       // Variável para armazenar a lista anterior (para restauração)
       let listaAnterior = null;
 
@@ -573,7 +574,7 @@
           };
           linhas.push(linha);
         });
-        
+
         // Salva no localStorage como backup
         localStorage.setItem('registrosSagui', JSON.stringify(linhas));
         return linhas;
@@ -582,7 +583,7 @@
       // Função para salvar no arquivo JSON local (registros_sagui.json)
       function salvarNoArquivoLocal() {
         const dados = JSON.stringify(salvarRegistros(), null, 2); // Formatado para melhor leitura
-        
+
         // Usando a File System Access API (navegadores modernos)
         if ('showSaveFilePicker' in window) {
           window.showSaveFilePicker({
@@ -663,7 +664,7 @@
         if (file) {
           // Armazena o nome do arquivo atual
           atualizarNomeArquivo(file.name);
-          
+
           // Tenta obter o FileSystemFileHandle para uso posterior
           if ('showOpenFilePicker' in window) {
             try {
@@ -679,7 +680,7 @@
               console.log('Usuário cancelou ou navegador não suporta API:', err);
             }
           }
-          
+
           const reader = new FileReader();
           reader.onload = function(e) {
             const dados = e.target.result;
@@ -709,48 +710,48 @@
       }
 
       // --- FUNÇÕES PARA LIMPAR E RESTAURAR LISTA ---
-      
+
       // Função para limpar a lista
       function limparLista() {
         // Salva a lista atual antes de limpar
         listaAnterior = JSON.parse(localStorage.getItem('registrosSagui'));
-        
+
         // Limpa a tabela
         tableBody.innerHTML = '';
-        
+
         // Adiciona uma linha em branco
         adicionarLinha();
-        
+
         // Salva a lista vazia
         salvarRegistros();
-        
+
         // Atualiza o total
         calcularTotal();
-        
+
         // Habilita o botão de restaurar
         restoreBtn.disabled = false;
-        
+
         mostrarStatus('Lista limpa com sucesso!');
       }
-      
+
       // Função para restaurar a lista anterior
       function restaurarLista() {
         if (listaAnterior) {
           // Limpa a tabela atual
           tableBody.innerHTML = '';
-          
+
           // Restaura os dados da lista anterior
           localStorage.setItem('registrosSagui', JSON.stringify(listaAnterior));
-          
+
           // Carrega os registros
           carregarRegistros();
-          
+
           // Desabilita o botão de restaurar
           restoreBtn.disabled = true;
-          
+
           // Limpa a lista anterior
           listaAnterior = null;
-          
+
           mostrarStatus('Lista anterior restaurada com sucesso!');
         }
       }
@@ -768,15 +769,15 @@
           }
         });
         document.getElementById('total-valor').textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        
+
         // Calcula o valor com nota de terceiros (desconto de 5%)
         const valorNotaTerceiros = total * 0.95; // 100% - 5% = 95%
         document.getElementById('total-nota-terceiros').textContent = valorNotaTerceiros.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        
+
         // Calcula o campo valor da nota (desconto de 95%)
         const valorNota = total * 0.05; // 100% - 95% = 5%
         document.getElementById('total-valor-nota').textContent = valorNota.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        
+
         // Atualiza o calendário de resumo diário
         atualizarCalendarioResumo();
       }
@@ -784,13 +785,13 @@
       // Função para calcular horas e ganhos por dia e atualizar o calendário
       function atualizarCalendarioResumo() {
         const resumoPorDia = {};
-        
+
         // Coleta dados de cada linha da tabela
         tableBody.querySelectorAll('tr').forEach(row => {
           const data = row.querySelector('.data').value;
           const horas = row.querySelector('.horas-total').value;
           const valor = row.querySelector('.valor-linha').value;
-          
+
           if (data && horas && valor) {
             if (!resumoPorDia[data]) {
               resumoPorDia[data] = {
@@ -799,32 +800,32 @@
                 quantidadeRegistros: 0
               };
             }
-            
+
             // Converte horas para número decimal (ex: 02:30:00 -> 2.5)
             const [horasStr, minutosStr, segundosStr] = horas.split(':');
             const horasDecimais = parseInt(horasStr) + parseInt(minutosStr) / 60 + parseInt(segundosStr) / 3600;
-            
+
             // Converte valor para número
             const valorNumerico = parseFloat(valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
-            
+
             resumoPorDia[data].totalHoras += horasDecimais;
             resumoPorDia[data].totalValor += valorNumerico;
             resumoPorDia[data].quantidadeRegistros++;
           }
         });
-        
+
         // Ordena as datas
         const datasOrdenadas = Object.keys(resumoPorDia).sort();
-        
+
         // Gera o HTML do calendário
         const calendarioGrid = document.getElementById('calendario-grid');
         calendarioGrid.innerHTML = '';
-        
+
         if (datasOrdenadas.length === 0) {
           calendarioGrid.innerHTML = '<div class="dia-sem-dados">Nenhum registro encontrado</div>';
           return;
         }
-        
+
         // Cria um card para cada dia
         datasOrdenadas.forEach(data => {
           const resumo = resumoPorDia[data];
@@ -835,7 +836,7 @@
             month: '2-digit',
             year: 'numeric'
           });
-          
+
           const diaCard = document.createElement('div');
           diaCard.className = 'dia-card';
           diaCard.innerHTML = `
@@ -843,7 +844,7 @@
             <div class="dia-horas">Horas: ${resumo.totalHoras.toFixed(2)}h</div>
             <div class="dia-valor">${resumo.totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
           `;
-          
+
           calendarioGrid.appendChild(diaCard);
         });
       }
@@ -853,7 +854,7 @@
         const fimInput = rowElement.querySelector('.fim-time');
         const horasInput = rowElement.querySelector('.horas-total');
         const valorInput = rowElement.querySelector('.valor-linha');
-        
+
         const inicioValue = inicioInput.value;
         const fimValue = fimInput.value;
 
@@ -937,11 +938,11 @@
         // Calcula a linha quando início ou fim mudam
         rowElement.querySelector('.inicio-time').addEventListener('change', () => calcularLinha(rowElement));
         rowElement.querySelector('.fim-time').addEventListener('change', () => calcularLinha(rowElement));
-        
+
         // Configura os checkboxes de opções
         const checkboxes = rowElement.querySelectorAll('.opcao-concluido');
         const hiddenInput = rowElement.querySelector('.concluido');
-        
+
         checkboxes.forEach(checkbox => {
           checkbox.addEventListener('change', () => {
             // Atualiza o valor do campo oculto com as opções selecionadas
@@ -951,10 +952,10 @@
             salvarRegistros();
           });
         });
-        
+
         // Configura os botões de seta com efeito de piscar contínuo após clicar
         const setaBotoes = rowElement.querySelectorAll('.seta-botao');
-        
+
         setaBotoes.forEach(botao => {
           // Atualiza estado inicial baseado no data-selecionado
           if (botao.dataset.selecionado === 'true') {
@@ -964,15 +965,15 @@
             botao.classList.add('piscando-continuo');
             svgIcon.classList.add('piscando-continuo');
           }
-          
+
           botao.addEventListener('click', () => {
             // Adiciona efeito de piscar ao clicar
             const svgIcon = botao.querySelector('.seta-icon');
-            
+
             // Primeiro piscar rápido
             botao.classList.add('piscando');
             svgIcon.classList.add('piscando');
-            
+
             // Após o piscar rápido, inicia o piscar contínuo
             setTimeout(() => {
               botao.classList.remove('piscando');
@@ -981,30 +982,30 @@
               botao.classList.add('piscando-continuo');
               svgIcon.classList.add('piscando-continuo');
             }, 1200);
-            
+
             // Alterna seleção
             const valor = botao.dataset.value;
             const estaSelecionado = botao.classList.contains('selecionado');
-            
+
             if (estaSelecionado) {
               botao.classList.remove('selecionado');
             } else {
               botao.classList.add('selecionado');
             }
-            
+
             // Atualiza o campo oculto
             const selecionados = Array.from(rowElement.querySelectorAll('.seta-botao.selecionado'))
               .map(btn => btn.dataset.value);
-            
+
             // Adiciona também os checkboxes normais
             const checkboxesSelecionados = Array.from(rowElement.querySelectorAll('.opcao-concluido:checked'))
               .map(cb => cb.value);
-            
+
             hiddenInput.value = [...checkboxesSelecionados, ...selecionados].join(', ');
             salvarRegistros();
           });
         });
-        
+
         // Salva os dados quando qualquer outro campo é alterado
         rowElement.querySelector('.descricao').addEventListener('change', salvarRegistros);
         rowElement.querySelector('.data').addEventListener('change', () => {
@@ -1019,10 +1020,10 @@
       function salvarComoPDF() {
         // Cria um elemento para mostrar status
         mostrarStatus('Gerando PDF...');
-        
+
         // Cria um clone da tabela para manipulação
         const tabelaClone = document.querySelector('table').cloneNode(true);
-        
+
         // Adiciona estilos específicos para impressão
         const style = document.createElement('style');
         style.textContent = `
@@ -1032,7 +1033,7 @@
           th { background-color: #f2f2f2; }
           h2 { text-align: center; margin-bottom: 20px; }
         `;
-        
+
         // Cria um novo documento para impressão
         const printWindow = window.open('', '_blank');
         printWindow.document.write('<html><head><title>SAGUI DIGITAL - Registro de Atividade</title>');
@@ -1046,7 +1047,7 @@
         printWindow.document.write('</div>');
         printWindow.document.write('</body></html>');
         printWindow.document.head.appendChild(style);
-        
+
         // Aguarda o carregamento do conteúdo
         printWindow.document.close();
         printWindow.onload = function() {
@@ -1059,7 +1060,7 @@
       // Função para salvar como Word
       function salvarComoWord() {
         mostrarStatus('Gerando documento Word...');
-        
+
         // Coleta todos os dados da tabela
         const linhas = [];
         tableBody.querySelectorAll('tr').forEach(row => {
@@ -1081,7 +1082,7 @@
           const data = linha.data;
           const horas = linha.horas;
           const valor = linha.valor;
-          
+
           if (data && horas && valor) {
             if (!resumoPorDia[data]) {
               resumoPorDia[data] = {
@@ -1090,14 +1091,14 @@
                 quantidadeRegistros: 0
               };
             }
-            
+
             // Converte horas para número decimal
             const [horasStr, minutosStr, segundosStr] = horas.split(':');
             const horasDecimais = parseInt(horasStr) + parseInt(minutosStr) / 60 + parseInt(segundosStr) / 3600;
-            
+
             // Converte valor para número
             const valorNumerico = parseFloat(valor.replace('R$', '').replace(/\./g, '').replace(',', '.').trim());
-            
+
             resumoPorDia[data].totalHoras += horasDecimais;
             resumoPorDia[data].totalValor += valorNumerico;
             resumoPorDia[data].quantidadeRegistros++;
@@ -1131,7 +1132,7 @@
           </head>
           <body>
             <h2>SAGUI DIGITAL - Registro de Atividade</h2>
-            
+
             <div class="resumo-dia-section">
               <h3>Resumo de Ganhos por Dia</h3>
         `;
@@ -1144,7 +1145,7 @@
             // Formata a data corretamente
             const [ano, mes, dia] = data.split('-');
             const dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR');
-            
+
             htmlContent += `
               <div class="resumo-dia-item">
                 <div class="resumo-dia-data">${dataFormatada}</div>
@@ -1159,7 +1160,7 @@
 
         htmlContent += `
             </div>
-            
+
             <h3>Detalhes por Registro</h3>
             <table>
               <thead>
@@ -1200,14 +1201,14 @@
         htmlContent += `
               </tbody>
             </table>
-            
+
             <div class="total-section">
               <h3>Resumo Financeiro</h3>
               <div class="total-item"><strong>Total Geral:</strong> ${totalGeral}</div>
               <div class="total-item"><strong>Valor com Nota de Terceiros (-5%):</strong> ${totalNotaTerceiros}</div>
               <div class="total-item"><strong>Campo Valor da Nota (-95%):</strong> ${totalValorNota}</div>
             </div>
-            
+
             <div class="data-geracao">
               <p>Documento gerado em: ${dataGeracao}</p>
               <p>Sistema SAGUI DIGITAL - Registro de Atividade</p>
@@ -1224,10 +1225,10 @@
         a.download = `Registro_Atividade_SAGUI_${new Date().toISOString().split('T')[0]}.doc`;
         a.click();
         URL.revokeObjectURL(url);
-        
+
         mostrarStatus('Documento Word gerado com sucesso!');
       }
-      
+
       // Event listeners para os botões
       addRowBtn.addEventListener('click', () => adicionarLinha());
       document.getElementById('save-btn').addEventListener('click', salvarComo);
@@ -1236,28 +1237,28 @@
       document.getElementById('save-word-btn').addEventListener('click', salvarComoWord);
       document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
       document.getElementById('import-file').addEventListener('change', importarDados);
-      
+
       // Event listeners para limpar e restaurar lista
       clearBtn.addEventListener('click', () => {
         confirmModal.classList.add('active');
       });
-      
+
       confirmClearBtn.addEventListener('click', () => {
         limparLista();
         confirmModal.classList.remove('active');
       });
-      
+
       cancelClearBtn.addEventListener('click', () => {
         confirmModal.classList.remove('active');
       });
-      
+
       restoreBtn.addEventListener('click', restaurarLista);
 
       // Salva os dados antes de fechar a página
       window.addEventListener('beforeunload', () => {
         // Salva no localStorage
         salvarRegistros();
-        
+
         // Tenta salvar no arquivo local se estiver usando esse arquivo
         if (arquivoAtual === jsonLocalFilename && window.fileHandleCache) {
           try {
@@ -1272,12 +1273,12 @@
       });
 
       // --- PONTO DE PARTIDA ---
-      
+
       // Função para salvar automaticamente a cada 3 segundos
       function iniciarSalvamentoAutomatico() {
         setInterval(() => {
           const dados = JSON.stringify(salvarRegistros(), null, 2);
-          
+
           // Salva no arquivo local apenas se tiver acesso direto ao arquivo
           if (window.fileHandleCache) {
             window.fileHandleCache.createWritable().then(writable => {
@@ -1286,14 +1287,14 @@
               console.error('Erro ao salvar automaticamente:', err);
             });
           }
-          
+
           // Sempre salva no localStorage como backup
           localStorage.setItem('registrosSaguiBackup', dados);
-          
+
           // Não tenta fazer download do arquivo automaticamente
         }, 3000); // Salva a cada 3 segundos
       }
-      
+
       // Tenta carregar o arquivo registros_sagui.json automaticamente ao iniciar
       fetch(jsonLocalFilename)
         .then(response => {
@@ -1306,10 +1307,10 @@
           carregarRegistros();
           atualizarNomeArquivo(jsonLocalFilename);
           mostrarStatus('Dados carregados automaticamente do arquivo local!');
-          
+
           // Inicia o salvamento automático
           iniciarSalvamentoAutomatico();
-          
+
           // Tenta obter acesso ao arquivo para salvamento posterior
           if ('showOpenFilePicker' in window) {
             navigator.serviceWorker.register('sw.js').then(() => {
@@ -1323,7 +1324,7 @@
           console.log('Nenhum arquivo local encontrado:', err);
           // Carrega do localStorage se não encontrar o arquivo
           carregarRegistros();
-          
+
           // Inicia o salvamento automático mesmo sem arquivo inicial
           iniciarSalvamentoAutomatico();
         });
