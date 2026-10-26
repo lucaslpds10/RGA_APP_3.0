@@ -9,3 +9,7 @@
 
 # Logs
 *.log
+
+# Local development files
+server.log
+server.pid
