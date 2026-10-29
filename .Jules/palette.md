@@ -1,0 +1,3 @@
+## 2024-03-20 - Dynamic Status Messages Accessibility
+**Learning:** Dynamic status messages (toasts) in the UI, such as `.status-message`, need `role="status"` and `aria-live="polite"` to ensure screen readers announce them when they appear.
+**Action:** Always add `role="status"` and `aria-live="polite"` to dynamic toast or status message containers so screen reader users are informed of system updates.
