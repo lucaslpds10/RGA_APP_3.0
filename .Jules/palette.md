@@ -1,0 +1,3 @@
+## 2024-05-18 - Conditionally applying UI side-effects in shared logic
+**Learning:** Shared DOM manipulation functions (like row addition) shouldn't apply UX side-effects (like auto-focus) unconditionally. When used in bulk (e.g. data import), unconditional auto-focus causes jarring focus-stealing regressions and performance issues as focus shifts across many elements sequentially.
+**Action:** When adding UX interactions (auto-focus, transitions, sounds) to shared logic, conditionally enable them based on user intent (e.g. only on manual interaction/save) to prevent issues during automated/bulk operations.
