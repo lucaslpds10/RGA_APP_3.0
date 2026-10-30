@@ -501,7 +501,7 @@
       </div>
     </div>
     
-    <div class="status-message" id="status-message"></div>
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
@@ -930,7 +930,10 @@
         `;
         tableBody.appendChild(newRow);
         setupRowEventListeners(newRow);
-        if (salvar) salvarRegistros();
+        if (salvar) {
+          newRow.querySelector('.descricao').focus();
+          salvarRegistros();
+        }
       }
 
       function setupRowEventListeners(rowElement) {
