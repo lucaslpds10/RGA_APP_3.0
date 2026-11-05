@@ -1,0 +1,3 @@
+## 2024-11-05 - Managing focus during bulk imports vs. manual row additions
+**Learning:** In applications where the same function (e.g., `adicionarLinha`) is used for both manual user interaction and bulk data processing (like loading from JSON/localStorage), unconditionally adding UI side-effects like `.focus()` can lead to severe focus-stealing issues during the bulk operation. This disrupts the user experience and can cause performance or a11y problems.
+**Action:** When adding focus logic or other UI side-effects to shared rendering functions, always conditionally gate them based on whether the action was user-initiated (e.g., `if (salvar)` or `if (isManualAction)`), ensuring bulk imports remain silent and do not manipulate focus.
