@@ -134,6 +134,10 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 194, 255, 0.3);
     }
+    button:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
     
     button svg {
       width: 18px;
@@ -501,7 +505,7 @@
       </div>
     </div>
     
-    <div class="status-message" id="status-message"></div>
+    <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
   </main>
 
   <!-- Modal de confirmação para limpar lista -->
